@@ -13,6 +13,17 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+vim.api.nvim_create_autocmd("ColorScheme", {
+	callback = function()
+		local theme = vim.g.colors_name
+		local file = io.open(os.getenv("HOME") .. "/.config/wezterm/nvim_theme", "w")
+		if file then
+			file:write(theme)
+			file:close()
+		end
+	end,
+})
+
 vim.o.updatetime = 500
 
 vim.diagnostic.config({

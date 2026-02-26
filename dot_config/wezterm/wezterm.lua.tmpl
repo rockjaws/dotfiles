@@ -1,47 +1,134 @@
 local wezterm = require("wezterm")
-local config = {}
-
+local config = wezterm.config_builder()
+-- Theme file watcher
+{{ if eq .chezmoi.os "windows" }}
+local theme_file = os.getenv("USERPROFILE") .. "/.config/wezterm/nvim_theme"
+{{ else }}
+local theme_file = os.getenv("HOME") .. "/.config/wezterm/nvim_theme"
+{{ end }}
+config.automatically_reload_config = true
+wezterm.add_to_config_reload_watch_list(theme_file)
+local theme_map = {
+	["tokyonight"] = "Tokyo Night",
+	["gruvbox"] = "GruvboxDark",
+	["carbonfox"] = "carbonfox",
+	["catppuccin-macchiato"] = "Catppuccin Macchiato",
+	["catppuccin-mocha"] = "Catppuccin Mocha",
+	["kanagawa"] = "Kanagawa (Gogh)",
+	["rose-pine-moon"] = "rose-pine-moon",
+}
+local tab_colors = {
+	["tokyonight"] = {
+		bg = "#1a1b26",
+		active_bg = "#7aa2f7",
+		active_fg = "#1a1b26",
+		inactive_bg = "#292e42",
+		inactive_fg = "#787c99",
+		hover_bg = "#3b4261",
+		hover_fg = "#c0caf5",
+	},
+	["gruvbox"] = {
+		bg = "#1d2021",
+		active_bg = "#d79921",
+		active_fg = "#1d2021",
+		inactive_bg = "#3c3836",
+		inactive_fg = "#a89984",
+		hover_bg = "#504945",
+		hover_fg = "#ebdbb2",
+	},
+	["carbonfox"] = {
+		bg = "#161616",
+		active_bg = "#78a9ff",
+		active_fg = "#161616",
+		inactive_bg = "#282828",
+		inactive_fg = "#6e6a86",
+		hover_bg = "#393939",
+		hover_fg = "#f2f4f8",
+	},
+	["catppuccin-macchiato"] = {
+		bg = "#24273a",
+		active_bg = "#8aadf4",
+		active_fg = "#24273a",
+		inactive_bg = "#363a4f",
+		inactive_fg = "#6e738d",
+		hover_bg = "#494d64",
+		hover_fg = "#cad3f5",
+	},
+	["catppuccin-mocha"] = {
+		bg = "#1e1e2e",
+		active_bg = "#89b4fa",
+		active_fg = "#1e1e2e",
+		inactive_bg = "#313244",
+		inactive_fg = "#6c7086",
+		hover_bg = "#45475a",
+		hover_fg = "#cdd6f4",
+	},
+	["kanagawa"] = {
+		bg = "#1f1f28",
+		active_bg = "#7e9cd8",
+		active_fg = "#1f1f28",
+		inactive_bg = "#2a2a37",
+		inactive_fg = "#727169",
+		hover_bg = "#363646",
+		hover_fg = "#dcd7ba",
+	},
+	["rose-pine-moon"] = {
+		bg = "#232136",
+		active_bg = "#ea9a97",
+		active_fg = "#232136",
+		inactive_bg = "#2d2a45",
+		inactive_fg = "#6e6a86",
+		hover_bg = "#44415a",
+		hover_fg = "#e0def4",
+	},
+}
+local function get_nvim_theme()
+	local file = io.open(theme_file, "r")
+	if not file then
+		return "tokyonight"
+	end
+	local theme = file:read("*l")
+	file:close()
+	return theme or "tokyonight"
+end
+local current_theme = get_nvim_theme()
+local colors = tab_colors[current_theme] or tab_colors["tokyonight"]
 -- OS specific
 {{ if eq .chezmoi.os "windows" }}
 config.max_fps = 120
 config.font_size = 11
 config.default_prog = {'C:\\Program Files\\PowerShell\\7\\pwsh.exe', '-NoLogo'}
 config.window_padding = {
-    left = 10,
-    right = 9,
-    top = 4,
-    bottom = 0,
+	left = 10,
+	right = 9,
+	top = 4,
+	bottom = 0,
 }
 {{ else }}
 config.max_fps = 240
 config.font_size = 14
 config.window_padding = {
-    left = 9,
-    right = 9,
-    top = 8,
-    bottom = 0,
+	left = 9,
+	right = 9,
+	top = 8,
+	bottom = 0,
 }
 {{ end }}
-
-config.color_scheme = "Tokyo Night"
+config.color_scheme = theme_map[current_theme] or "Tokyo Night"
 config.hide_mouse_cursor_when_typing = true
-
 -- Window settings
--- config.window_decorations = "RESIZE"
 config.adjust_window_size_when_changing_font_size = false
 config.use_resize_increments = false
-
 -- Tab bar settings
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.show_new_tab_button_in_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_max_width = 32
-
--- Show tab index + folder name instead of full process title
+-- Show tab index + folder name
 wezterm.on("format-tab-title", function(tab)
 	local pane = tab.active_pane
-	local title = tab.tab_title -- respects manually renamed tabs (your Ctrl+Shift+R bind)
+	local title = tab.tab_title
 	if not title or title == "" then
 		local cwd = pane.current_working_dir
 		if cwd then
@@ -52,7 +139,6 @@ wezterm.on("format-tab-title", function(tab)
 	end
 	return " " .. (tab.tab_index + 1) .. ": " .. title .. " "
 end)
-
 -- Keybinds
 local keys = {
 	{
@@ -68,7 +154,6 @@ local keys = {
 		}),
 	},
 }
--- Generate Alt+1-9 tab switching
 for i = 1, 9 do
 	table.insert(keys, {
 		key = tostring(i),
@@ -77,26 +162,24 @@ for i = 1, 9 do
 	})
 end
 config.keys = keys
-
--- Tab bar colors
+-- Dynamic tab bar colors
 config.colors = {
 	tab_bar = {
-		background = "#1a1b26",
-		inactive_tab_edge = "#1a1b26",
+		background = colors.bg,
+		inactive_tab_edge = colors.bg,
 		active_tab = {
-			bg_color = "#7aa2f7",
-			fg_color = "#1a1b26",
+			bg_color = colors.active_bg,
+			fg_color = colors.active_fg,
 			intensity = "Bold",
 		},
 		inactive_tab = {
-			bg_color = "#292e42",
-			fg_color = "#787c99",
+			bg_color = colors.inactive_bg,
+			fg_color = colors.inactive_fg,
 		},
 		inactive_tab_hover = {
-			bg_color = "#3b4261",
-			fg_color = "#c0caf5",
+			bg_color = colors.hover_bg,
+			fg_color = colors.hover_fg,
 		},
 	},
 }
-
 return config
