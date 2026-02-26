@@ -1,9 +1,29 @@
 local wezterm = require("wezterm")
 local config = {}
 
+-- OS specific
+{{ if eq .chezmoi.os "windows" }}
+config.max_fps = 120
+config.font_size = 11
+config.default_prog = {'C:\\Program Files\\PowerShell\\7\\pwsh.exe', '-NoLogo'}
+config.window_padding = {
+    left = 10,
+    right = 9,
+    top = 4,
+    bottom = 0,
+}
+{{ else }}
 config.max_fps = 240
-config.color_scheme = "Tokyo Night"
 config.font_size = 14
+config.window_padding = {
+    left = 9,
+    right = 9,
+    top = 8,
+    bottom = 0,
+}
+{{ end }}
+
+config.color_scheme = "Tokyo Night"
 config.hide_mouse_cursor_when_typing = true
 
 -- Window settings
@@ -77,14 +97,6 @@ config.colors = {
 			fg_color = "#c0caf5",
 		},
 	},
-}
-
--- Padding
-config.window_padding = {
-	left = 9,
-	right = 9,
-	top = 8,
-	bottom = 0,
 }
 
 return config

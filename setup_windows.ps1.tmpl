@@ -1,0 +1,12 @@
+{{ if eq .chezmoi.os "windows" }}
+$source = "$env:LOCALAPPDATA\nvim"
+$target = "$env:USERPROFILE\.config\nvim"
+
+if (!(Test-Path $target)) {
+    New-Item -ItemType Directory -Force -Path $target
+}
+
+if (!(Test-Path $source)) {
+    New-Item -ItemType SymbolicLink -Path $source -Target $target -Force
+}
+{{ end }}
