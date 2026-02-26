@@ -16,7 +16,8 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
 		local theme = vim.g.colors_name
-		local file = io.open(os.getenv("HOME") .. "/.config/wezterm/nvim_theme", "w")
+		local home = os.getenv("HOME") or os.getenv("USERPROFILE")
+		local file = io.open(home .. "/.config/wezterm/nvim_theme", "w")
 		if file then
 			file:write(theme)
 			file:close()
