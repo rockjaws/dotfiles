@@ -27,21 +27,22 @@ multiplier = 3
 
 [font]
 size = 14
+builtin_box_drawing = true
 
 [font.normal]
-family = "monospace"
+family = "JetBrains Mono"
 style = "Regular"
 
 [font.bold]
-family = "monospace"
+family = "JetBrains Mono"
 style = "Bold"
 
 [font.italic]
-family = "monospace"
+family = "JetBrains Mono"
 style = "Italic"
 
 [font.bold_italic]
-family = "monospace"
+family = "JetBrains Mono"
 style = "Bold Italic"
 
 [selection]

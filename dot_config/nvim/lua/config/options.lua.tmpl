@@ -22,9 +22,10 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 			file:write(theme)
 			file:close()
 		end
-
-		-- Update Alacritty theme (live_config_reload picks it up instantly)
+{{ if ne .chezmoi.os "windows" }}
+		-- Update Alacritty + tmux theme (Linux/macOS only)
 		vim.fn.jobstart({ home .. "/.config/alacritty/apply_theme.sh" }, { detach = true })
+{{ end }}
 	end,
 })
 
@@ -39,3 +40,4 @@ vim.diagnostic.config({
 	},
 	update_in_insert = false,
 })
+
