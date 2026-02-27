@@ -22,6 +22,9 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 			file:write(theme)
 			file:close()
 		end
+
+		-- Update Alacritty theme (live_config_reload picks it up instantly)
+		vim.fn.jobstart({ home .. "/.config/alacritty/apply_theme.sh" }, { detach = true })
 	end,
 })
 
