@@ -11,6 +11,7 @@ wezterm.add_to_config_reload_watch_list(theme_file)
 local theme_map = {
 	["tokyonight"] = "Tokyo Night",
 	["gruvbox"] = "GruvboxDark",
+	["ayu-mirage"] = "Ayu Mirage",
 }
 local tab_colors = {
 	["tokyonight"] = {
@@ -31,8 +32,16 @@ local tab_colors = {
 		hover_bg = "#504945",
 		hover_fg = "#ebdbb2",
 	},
-}
-local function get_nvim_theme()
+	["ayu-mirage"] = {
+		bg = "#1f2430",
+		active_bg = "#5ccfe6",
+		active_fg = "#1f2430",
+		inactive_bg = "#2d3347",
+		inactive_fg = "#707a8c",
+		hover_bg = "#343d4f",
+		hover_fg = "#cbccc6",
+	},
+}local function get_nvim_theme()
 	local file = io.open(theme_file, "r")
 	if not file then
 		return "tokyonight"

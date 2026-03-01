@@ -4,12 +4,14 @@ return {
 	dependencies = {
 		"folke/tokyonight.nvim",
 		"ellisonleao/gruvbox.nvim",
+		"Shatur/neovim-ayu",
 	},
 	config = function()
 		require("themery").setup({
 			themes = {
 				{ name = "Tokyo Night", colorscheme = "tokyonight" },
 				{ name = "Gruvbox Dark", colorscheme = "gruvbox" },
+				{ name = "Ayu Mirage", colorscheme = "ayu-mirage" },
 			},
 			livePreview = true,
 		})
