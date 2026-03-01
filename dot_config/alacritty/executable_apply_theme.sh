@@ -15,7 +15,7 @@ case "$theme" in
     cp "$ALACRITTY_THEMES/gruvbox.toml" "$ALACRITTY_CURRENT"
     cp "$TMUX_THEMES/gruvbox.conf" "$TMUX_CURRENT"
     ;;
-  ayu-mirage)
+  ayu|ayu-mirage)
     cp "$ALACRITTY_THEMES/ayu_mirage.toml" "$ALACRITTY_CURRENT"
     cp "$TMUX_THEMES/ayu_mirage.conf" "$TMUX_CURRENT"
     ;;
