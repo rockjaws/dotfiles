@@ -13,9 +13,7 @@ return {
 				"github:Crashdummyy/mason-registry",
 			},
 		})
-		require("mason-lspconfig").setup({
-			ensure_installed = { "ts_ls", "zls", "lua_ls", "gopls" },
-		})
+		require("mason-lspconfig").setup({})
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
 		capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -109,12 +107,6 @@ return {
 				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-				vim.api.nvim_create_autocmd("BufWritePre", {
-					buffer = ev.buf,
-					callback = function()
-						vim.lsp.buf.format({ name = "biome" })
-					end,
-				})
 			end,
 		})
 	end,
