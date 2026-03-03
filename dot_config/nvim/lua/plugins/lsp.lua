@@ -13,7 +13,6 @@ return {
 				"github:Crashdummyy/mason-registry",
 			},
 		})
-
 		require("mason-lspconfig").setup({
 			ensure_installed = { "ts_ls", "zls", "lua_ls", "gopls" },
 		})
@@ -25,8 +24,27 @@ return {
 			cmd = { "typescript-language-server", "--stdio" },
 			filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
 			root_markers = { "package.json", "tsconfig.json", "jsconfig.json" },
+			on_attach = function(client)
+				client.server_capabilities.documentFormattingProvider = false
+			end,
 		})
 		vim.lsp.enable("ts_ls")
+
+		vim.lsp.config("biome", {
+			capabilities = capabilities,
+			cmd = { "biome", "lsp-proxy" },
+			filetypes = {
+				"javascript",
+				"javascriptreact",
+				"typescript",
+				"typescriptreact",
+				"json",
+				"jsonc",
+				"css",
+			},
+			root_markers = { "biome.json", "biome.jsonc" },
+		})
+		vim.lsp.enable("biome")
 
 		vim.lsp.config("zls", {
 			capabilities = capabilities,
@@ -91,6 +109,12 @@ return {
 				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+				vim.api.nvim_create_autocmd("BufWritePre", {
+					buffer = ev.buf,
+					callback = function()
+						vim.lsp.buf.format({ name = "biome" })
+					end,
+				})
 			end,
 		})
 	end,
