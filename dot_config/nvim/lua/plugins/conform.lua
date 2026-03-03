@@ -11,6 +11,7 @@ return {
 			cs = { "csharpier" },
 			zig = { "zigfmt" },
 			lua = { "stylua" },
+			go = { "gofmt" },
 		},
 
 		format_on_save = {

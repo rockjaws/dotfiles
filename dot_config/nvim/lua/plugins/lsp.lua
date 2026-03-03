@@ -15,7 +15,7 @@ return {
 		})
 
 		require("mason-lspconfig").setup({
-			ensure_installed = { "ts_ls", "zls", "lua_ls" },
+			ensure_installed = { "ts_ls", "zls", "lua_ls", "gopls" },
 		})
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
 		capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -35,6 +35,22 @@ return {
 			root_markers = { "zls.json", "build.zig", ".git" },
 		})
 		vim.lsp.enable("zls")
+
+		vim.lsp.config("gopls", {
+			capabilities = capabilities,
+			cmd = { "gopls" },
+			filetypes = { "go", "gomod", "gowork", "gotmpl" },
+			root_markers = { "go.work", "go.mod", ".git" },
+			settings = {
+				gopls = {
+					analyses = {
+						unusedparams = true,
+					},
+					staticcheck = true,
+				},
+			},
+		})
+		vim.lsp.enable("gopls")
 
 		vim.lsp.config("lua_ls", {
 			capabilities = capabilities,
