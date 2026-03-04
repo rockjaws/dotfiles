@@ -11,6 +11,7 @@ return {
 			"javascript",
 			"c_sharp",
 			"zig",
+			"go",
 			"lua",
 			"tsx",
 			"vim",
