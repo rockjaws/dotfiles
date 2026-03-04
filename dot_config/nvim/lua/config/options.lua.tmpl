@@ -6,12 +6,6 @@ vim.opt.tabstop = 4
 vim.o.winborder = "rounded"
 vim.opt.mousehide = true
 vim.opt.clipboard = "unnamedplus"
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "javascriptreact", "typescriptreact" },
-	callback = function()
-		vim.treesitter.start()
-	end,
-})
 
 vim.api.nvim_create_autocmd("ColorScheme", {
 	callback = function()
