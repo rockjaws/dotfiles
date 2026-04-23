@@ -11,6 +11,7 @@ wezterm.add_to_config_reload_watch_list(theme_file)
 local theme_map = {
 	["tokyonight"] = "Tokyo Night",
 	["gruvbox"] = "GruvboxDark",
+	["gruvbox-material"] = "Gruvbox Material Dark Hard",
 	["ayu"] = "Ayu Mirage",
 	["ayu-mirage"] = "Ayu Mirage",
 }
@@ -32,6 +33,15 @@ local tab_colors = {
 		inactive_fg = "#a89984",
 		hover_bg = "#504945",
 		hover_fg = "#ebdbb2",
+	},
+	["gruvbox-material"] = {
+		bg = "#282828",
+		active_bg = "#d8a657",
+		active_fg = "#282828",
+		inactive_bg = "#3c3836",
+		inactive_fg = "#a89984",
+		hover_bg = "#504945",
+		hover_fg = "#d4be98",
 	},
 	["ayu-mirage"] = {
 		bg = "#1f2430",
@@ -147,4 +157,3 @@ config.colors = {
 	},
 }
 return config
-

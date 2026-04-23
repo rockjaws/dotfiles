@@ -4,6 +4,7 @@ return {
 	dependencies = {
 		"folke/tokyonight.nvim",
 		"ellisonleao/gruvbox.nvim",
+        "sainnhe/gruvbox-material",
 		"Shatur/neovim-ayu",
 	},
 	config = function()
@@ -11,6 +12,7 @@ return {
 			themes = {
 				{ name = "Tokyo Night", colorscheme = "tokyonight" },
 				{ name = "Gruvbox Dark", colorscheme = "gruvbox" },
+                { name = "Gruvbox Dark Material", colorscheme = "gruvbox-material" },
 				{ name = "Ayu Mirage", colorscheme = "ayu-mirage" },
 			},
 			livePreview = true,

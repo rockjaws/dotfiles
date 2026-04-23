@@ -29,22 +29,6 @@ multiplier = 3
 size = 14
 builtin_box_drawing = true
 
-[font.normal]
-family = "JetBrains Mono"
-style = "Regular"
-
-[font.bold]
-family = "JetBrains Mono"
-style = "Bold"
-
-[font.italic]
-family = "JetBrains Mono"
-style = "Italic"
-
-[font.bold_italic]
-family = "JetBrains Mono"
-style = "Bold Italic"
-
 [selection]
 semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 save_to_clipboard = true
