@@ -1,0 +1,9 @@
+[Desktop Entry]
+Categories=AudioVideo;Audio;
+Comment=Easy Effects audio effects for PipeWire
+Icon=easyeffects
+Name=Easy Effects
+StartupNotify=true
+Terminal=false
+Type=Application
+Exec=/usr/bin/easyeffects --gapplication-service

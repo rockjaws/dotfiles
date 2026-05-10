@@ -47,11 +47,6 @@ staged = "+${count} "
 renamed = "»${count} "
 deleted = "✘${count} "
 
-[rust]
-symbol = " "
-style = "fg:red bold"
-format = "[$symbol$version]($style) "
-
 [cmd_duration]
 min_time = 1000
 style = "fg:yellow bold"
