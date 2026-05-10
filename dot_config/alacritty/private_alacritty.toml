@@ -1,5 +1,5 @@
 [terminal.shell]
-program = "/bin/bash"
+program = "/bin/zsh"
 args = ["-c", "tmux attach || tmux new-session"]
 
 [env]
@@ -28,6 +28,22 @@ multiplier = 3
 [font]
 size = 14
 builtin_box_drawing = true
+
+[font.normal]
+family = "FiraCode Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "FiraCode Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "FiraCode Nerd Font"
+style = "Italic"
+
+[font.bold_italic]
+family = "FiraCode Nerd Font"
+style = "Bold Italic"
 
 [selection]
 semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"

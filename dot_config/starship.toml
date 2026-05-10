@@ -1,0 +1,84 @@
+# ~/.config/starship.toml
+# Uses terminal ANSI colors so it follows your synced Alacritty/tmux/Nvim theme.
+
+add_newline = true
+command_timeout = 1000
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$rust\
+$cmd_duration\
+$line_break\
+$character"""
+
+[character]
+success_symbol = "[❯](fg:green bold)"
+error_symbol = "[❯](fg:red bold)"
+vimcmd_symbol = "[❮](fg:yellow bold)"
+
+[directory]
+style = "fg:cyan bold"
+read_only = " "
+read_only_style = "fg:red bold"
+truncation_length = 4
+truncate_to_repo = true
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+[git_branch]
+symbol = " "
+style = "fg:purple bold"
+format = "[$symbol$branch]($style) "
+
+[git_status]
+style = "fg:red bold"
+format = "([$all_status$ahead_behind]($style) )"
+
+conflicted = "=${count} "
+ahead = "⇡${count} "
+behind = "⇣${count} "
+diverged = "⇕⇡${ahead_count}⇣${behind_count} "
+up_to_date = ""
+untracked = "?${count} "
+stashed = "\\$${count} "
+modified = "!${count} "
+staged = "+${count} "
+renamed = "»${count} "
+deleted = "✘${count} "
+
+[rust]
+symbol = " "
+style = "fg:red bold"
+format = "[$symbol$version]($style) "
+
+[cmd_duration]
+min_time = 1000
+style = "fg:yellow bold"
+format = "took [$duration]($style) "
+
+# Disabled because you said you do not want these.
+[package]
+disabled = true
+
+[time]
+disabled = true
+
+# Keep noisy modules off.
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[azure]
+disabled = true
+
+[docker_context]
+disabled = true
+
+[kubernetes]
+disabled = true
+
+[terraform]
+disabled = true

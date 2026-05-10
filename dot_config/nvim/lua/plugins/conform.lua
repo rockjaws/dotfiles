@@ -12,6 +12,7 @@ return {
 			zig = { "zigfmt" },
 			lua = { "stylua" },
 			go = { "gofmt" },
+			rust = { "rustfmt" },
 		},
 
 		format_on_save = {
