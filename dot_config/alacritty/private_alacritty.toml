@@ -30,20 +30,20 @@ size = 14
 builtin_box_drawing = true
 
 [font.normal]
-family = "FiraCode Nerd Font"
 style = "Regular"
+family = "JetBrainsMono Nerd Font"
 
 [font.bold]
-family = "FiraCode Nerd Font"
 style = "Bold"
+family = "JetBrainsMono Nerd Font"
 
 [font.italic]
-family = "FiraCode Nerd Font"
 style = "Italic"
+family = "JetBrainsMono Nerd Font"
 
 [font.bold_italic]
-family = "FiraCode Nerd Font"
 style = "Bold Italic"
+family = "JetBrainsMono Nerd Font"
 
 [selection]
 semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
